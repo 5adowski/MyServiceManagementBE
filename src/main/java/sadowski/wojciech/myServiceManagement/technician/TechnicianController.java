@@ -33,5 +33,4 @@ public class TechnicianController {
     public Technician get(@PathVariable Long id) {
         return service.read(id);
     }
-
 }
