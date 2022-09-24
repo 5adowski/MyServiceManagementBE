@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class Company {
-    private Long TIN;
+    private Long tin;
     private String name;
     private String zipCode;
     private String city;
