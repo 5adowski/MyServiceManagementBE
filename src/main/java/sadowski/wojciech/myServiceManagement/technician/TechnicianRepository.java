@@ -15,13 +15,19 @@ public class TechnicianRepository implements sadowski.wojciech.myServiceManageme
     }
 
     @Override
-    public void insert(Technician technician){
-        jdbcTemplate.update("INSERT INTO TECHNICIAN(NAME, PHONE_NUMBER, EMAIL)VALUES (?, ?, ?)",
-                technician.getName(), technician.getPhoneNumber(), technician.getEmail());
+    public void insert(Technician technician) {
+        jdbcTemplate.update("INSERT INTO TECHNICIAN(" +
+                        "NAME," +
+                        "PHONE_NUMBER," +
+                        "EMAIL)" +
+                        "VALUES (?, ?, ?)",
+                technician.getName(),
+                technician.getPhoneNumber(),
+                technician.getEmail());
     }
 
     @Override
-    public List<Technician> selectAll(){
+    public List<Technician> selectAll() {
         return jdbcTemplate.query("SELECT * FROM TECHNICIAN", BeanPropertyRowMapper.newInstance(Technician.class));
     }
 
