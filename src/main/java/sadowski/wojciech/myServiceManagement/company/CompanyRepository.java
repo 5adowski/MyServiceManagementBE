@@ -16,7 +16,7 @@ public class CompanyRepository implements sadowski.wojciech.myServiceManagement.
 
     @Override
     public void insert(Company company) {
-        jdbcTemplate.update("INSERT INTO COMPANY(TIN, NAME, ZIP_CODE, CITY, STREET)VALUES (?, ?, ?, ?, ?)");
+        jdbcTemplate.update("INSERT INTO COMPANY(TIN, NAME, ZIP_CODE, CITY, STREET)VALUES (?, ?, ?, ?, ?)", company.getTIN(), company.getName(), company.getZipCode(), company.getCity(), company.getStreet());
     }
 
     @Override
