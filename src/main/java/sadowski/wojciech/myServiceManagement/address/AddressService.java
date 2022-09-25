@@ -26,4 +26,14 @@ public class AddressService implements sadowski.wojciech.myServiceManagement.int
     public Address read(Long id) {
         return repository.select(id);
     }
+
+    @Override
+    public void update(Address address) {
+        repository.put(address);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.delete(id);
+    }
 }

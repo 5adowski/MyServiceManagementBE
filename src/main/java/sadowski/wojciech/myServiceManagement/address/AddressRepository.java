@@ -37,4 +37,24 @@ public class AddressRepository implements sadowski.wojciech.myServiceManagement.
     public Address select(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM ADDRES WHERE ID = ?", BeanPropertyRowMapper.newInstance(Address.class), id);
     }
+
+    @Override
+    public void put(Address address) {
+        jdbcTemplate.update("UPDATE ADDRESS SET " +
+                "ZIP_CODE = ?," +
+                "CITY = ?," +
+                "STREET = ?," +
+                "ID_DEVICES " +
+                "WHERE ID = ?",
+                address.getZipCode(),
+                address.getCity(),
+                address.getStreet(),
+                address.getIdDevices(),
+                address.getId());
+    }
+
+    @Override
+    public void delete(Long id) {
+        jdbcTemplate.update("DELETE FROM ADDRESS WHERE ID = ?", id);
+    }
 }
