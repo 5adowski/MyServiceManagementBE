@@ -24,7 +24,7 @@ public class CompanyController {
     }
 
     @GetMapping("/companies")
-    public List<Company> getAll(){
+    public List<Company> getAll() {
         return service.readAll();
     }
 

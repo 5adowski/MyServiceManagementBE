@@ -41,7 +41,7 @@ public class TechnicianRepository implements sadowski.wojciech.myServiceManageme
         jdbcTemplate.update("UPDATE TECHNICIAN SET " +
                         "NAME = ?," +
                         "PHONE_NUMBER = ?," +
-                        "EMAIL = ?" +
+                        "EMAIL = ? " +
                         "WHERE ID = ?",
                 technician.getName(),
                 technician.getPhoneNumber(),

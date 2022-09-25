@@ -16,15 +16,15 @@ public class TechnicianController {
     }
 
     @PostMapping(value = ("/technician"),
-    consumes = MediaType.APPLICATION_JSON_VALUE,
-    produces = MediaType.APPLICATION_JSON_VALUE)
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Technician> post(Technician technician) {
         service.create(technician);
         return ResponseEntity.accepted().body(technician);
     }
 
     @GetMapping(value = "/technicians")
-    public List<Technician> getAll(){
+    public List<Technician> getAll() {
         return service.readAll();
     }
 
@@ -34,8 +34,8 @@ public class TechnicianController {
     }
 
     @PutMapping(value = ("/technician"),
-    consumes = MediaType.APPLICATION_JSON_VALUE,
-    produces = MediaType.APPLICATION_JSON_VALUE)
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Technician> put(Technician technician) {
         service.update(technician);
         return ResponseEntity.accepted().body(technician);

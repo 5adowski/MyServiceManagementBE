@@ -41,4 +41,28 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
     public Customer select(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM CUSTOMER WHERE ID = ?", BeanPropertyRowMapper.newInstance(Customer.class), id);
     }
+
+    @Override
+    public void put(Customer customer) {
+        jdbcTemplate.update("UPDATE CUSTOMER SET " +
+                        "FIRST_NAME = ?," +
+                        "LAST_NAME = ?," +
+                        "PHONE_NUMBER = ?," +
+                        "EMAIL = ?," +
+                        "TIN = ?," +
+                        "ID_ADDRESSES = ? " +
+                        "WHERE ID = ?",
+                customer.getFirstName(),
+                customer.getLastName(),
+                customer.getPhoneNumber(),
+                customer.getEmail(),
+                customer.getTin(),
+                customer.getIdAddresses(),
+                customer.getId());
+    }
+
+    @Override
+    public void delete(Long id) {
+        jdbcTemplate.update("DELETE FROM CUSTOMER WHERE ID = ?", id);
+    }
 }

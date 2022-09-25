@@ -43,12 +43,12 @@ public class CompanyRepository implements sadowski.wojciech.myServiceManagement.
     @Override
     public void put(Company company) {
         jdbcTemplate.update("UPDATE COMPANY SET " +
-                "TIN = ?" +
-                "NAME = ?," +
-                "ZIP_CODE = ?," +
-                "CITY = ?," +
-                "STREET = ? " +
-                "WHERE TIN = ?",
+                        "TIN = ?" +
+                        "NAME = ?," +
+                        "ZIP_CODE = ?," +
+                        "CITY = ?," +
+                        "STREET = ? " +
+                        "WHERE TIN = ?",
                 company.getTin(),
                 company.getName(),
                 company.getZipCode(),

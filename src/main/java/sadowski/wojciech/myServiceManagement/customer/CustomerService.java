@@ -26,4 +26,14 @@ public class CustomerService implements sadowski.wojciech.myServiceManagement.in
     public Customer read(Long id) {
         return repository.select(id);
     }
+
+    @Override
+    public void update(Customer customer) {
+        repository.put(customer);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.delete(id);
+    }
 }
