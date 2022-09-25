@@ -17,12 +17,12 @@ public class CompanyRepository implements sadowski.wojciech.myServiceManagement.
     @Override
     public void insert(Company company) {
         jdbcTemplate.update("INSERT INTO COMPANY(" +
-                "TIN," +
-                "NAME," +
-                "ZIP_CODE," +
-                "CITY," +
-                "STREET)" +
-                "VALUES (?, ?, ?, ?, ?)",
+                        "TIN," +
+                        "NAME," +
+                        "ZIP_CODE," +
+                        "CITY," +
+                        "STREET)" +
+                        "VALUES (?, ?, ?, ?, ?)",
                 company.getTin(),
                 company.getName(),
                 company.getZipCode(),
