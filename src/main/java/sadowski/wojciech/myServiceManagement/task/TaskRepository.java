@@ -15,8 +15,8 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
     }
 
     @Override
-    public void insert(Task order) {
-        jdbcTemplate.update("INSERT INTO ORDERS(" +
+    public void insert(Task task) {
+        jdbcTemplate.update("INSERT INTO TASK(" +
                         "DESCRIPTION," +
                         "DATE," +
                         "START_TIME," +
@@ -31,28 +31,66 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
                         "ID_ADDRESS," +
                         "ID_DEVICE)" +
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                order.getDescription(),
-                order.getDate(),
-                order.getStartTime(),
-                order.getEndTime(),
-                order.getMinPrice(),
-                order.getMaxPrice(),
-                order.getStatus(),
-                order.getNotes(),
-                order.getIdTechnician(),
-                order.getIdCompany(),
-                order.getIdCustomer(),
-                order.getIdAddress(),
-                order.getIdDevice());
+                task.getDescription(),
+                task.getDate(),
+                task.getStartTime(),
+                task.getEndTime(),
+                task.getMinPrice(),
+                task.getMaxPrice(),
+                task.getStatus(),
+                task.getNotes(),
+                task.getIdTechnician(),
+                task.getIdCompany(),
+                task.getIdCustomer(),
+                task.getIdAddress(),
+                task.getIdDevice());
     }
 
     @Override
     public List<Task> selectAll() {
-        return jdbcTemplate.query("SELECT * FROM ORDERS", BeanPropertyRowMapper.newInstance(Task.class));
+        return jdbcTemplate.query("SELECT * FROM TASK", BeanPropertyRowMapper.newInstance(Task.class));
     }
 
     @Override
     public Task select(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM ORDERS WHERE ID = ?", BeanPropertyRowMapper.newInstance(Task.class), id);
+        return jdbcTemplate.queryForObject("SELECT * FROM TASK WHERE ID = ?", BeanPropertyRowMapper.newInstance(Task.class), id);
+    }
+
+    @Override
+    public void put(Task task) {
+        jdbcTemplate.update("UPDATE TASK SET " +
+                        "DESCRIPTION = ?," +
+                        "DATE = ?," +
+                        "START_TIME = ?," +
+                        "END_TIME = ?," +
+                        "MIN_PRICE = ?," +
+                        "MAX_PRICE = ?," +
+                        "STATUS = ?," +
+                        "NOTES = ?," +
+                        "ID_TECHNICIAN = ?," +
+                        "ID_COMPANY = ?," +
+                        "ID_CUSTOMER = ?," +
+                        "ID_ADDRESS = ?," +
+                        "ID_DEVICE = ? " +
+                        "WHERE ID = ?",
+                task.getDescription(),
+                task.getDate(),
+                task.getStartTime(),
+                task.getEndTime(),
+                task.getMinPrice(),
+                task.getMaxPrice(),
+                task.getStatus(),
+                task.getNotes(),
+                task.getIdTechnician(),
+                task.getIdCompany(),
+                task.getIdCustomer(),
+                task.getIdAddress(),
+                task.getIdDevice(),
+                task.getId());
+    }
+
+    @Override
+    public void delete(Long id) {
+        jdbcTemplate.update("DELETE FROM TASK WHERE ID = ?", id);
     }
 }

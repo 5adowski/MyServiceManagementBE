@@ -26,4 +26,14 @@ public class DeviceService implements sadowski.wojciech.myServiceManagement.inte
     public Device read(Long id) {
         return repository.select(id);
     }
+
+    @Override
+    public void update(Device device) {
+        repository.put(device);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.delete(id);
+    }
 }

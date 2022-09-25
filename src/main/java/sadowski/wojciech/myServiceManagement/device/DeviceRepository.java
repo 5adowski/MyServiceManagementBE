@@ -37,4 +37,24 @@ public class DeviceRepository implements sadowski.wojciech.myServiceManagement.i
     public Device select(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM DEVICE WHERE ID = ?", BeanPropertyRowMapper.newInstance(Device.class), id);
     }
+
+    @Override
+    public void put(Device device) {
+        jdbcTemplate.update("UPDATE DEVICE SET " +
+                        "ID_FACTORY = ?," +
+                        "ID_FD = ?," +
+                        "SERIAL_NUMBER = ?," +
+                        "CATALOG_NUMBER = ? " +
+                        "WHERE ID = ?",
+                device.getIdFactory(),
+                device.getIdFd(),
+                device.getSerialNumber(),
+                device.getCatalogNumber(),
+                device.getId());
+    }
+
+    @Override
+    public void delete(Long id) {
+        jdbcTemplate.update("DELETE FROM DEVICE WHERE ID = ?", id);
+    }
 }

@@ -13,8 +13,8 @@ public class TaskService implements sadowski.wojciech.myServiceManagement.interf
     }
 
     @Override
-    public void create(Task order) {
-        repository.insert(order);
+    public void create(Task task) {
+        repository.insert(task);
     }
 
     @Override
@@ -25,5 +25,15 @@ public class TaskService implements sadowski.wojciech.myServiceManagement.interf
     @Override
     public Task read(Long id) {
         return repository.select(id);
+    }
+
+    @Override
+    public void update(Task task) {
+        repository.put(task);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.delete(id);
     }
 }
