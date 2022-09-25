@@ -26,4 +26,14 @@ public class TechnicianService implements sadowski.wojciech.myServiceManagement.
     public Technician read(Long id) {
         return repository.select(id);
     }
+
+    @Override
+    public void update(Technician technician) {
+        repository.put(technician);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.delete(id);
+    }
 }

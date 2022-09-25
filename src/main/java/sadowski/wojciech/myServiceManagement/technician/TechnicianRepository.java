@@ -35,4 +35,22 @@ public class TechnicianRepository implements sadowski.wojciech.myServiceManageme
     public Technician select(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM TECHNICIAN WHERE ID = ?", BeanPropertyRowMapper.newInstance(Technician.class), id);
     }
+
+    @Override
+    public void put(Technician technician) {
+        jdbcTemplate.update("UPDATE TECHNICIAN SET " +
+                        "NAME = ?," +
+                        "PHONE_NUMBER = ?," +
+                        "EMAIL = ?" +
+                        "WHERE ID = ?",
+                technician.getName(),
+                technician.getPhoneNumber(),
+                technician.getEmail(),
+                technician.getId());
+    }
+
+    @Override
+    public void delete(Long id) {
+        jdbcTemplate.update("DELETE FROM TECHNICIAN WHERE ID = ?", id);
+    }
 }
