@@ -39,4 +39,26 @@ public class CompanyRepository implements sadowski.wojciech.myServiceManagement.
     public Company select(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM COMPANY WHERE ID = ?", BeanPropertyRowMapper.newInstance(Company.class), id);
     }
+
+    @Override
+    public void put(Company company) {
+        jdbcTemplate.update("UPDATE COMPANY SET " +
+                "TIN = ?" +
+                "NAME = ?," +
+                "ZIP_CODE = ?," +
+                "CITY = ?," +
+                "STREET = ? " +
+                "WHERE TIN = ?",
+                company.getTin(),
+                company.getName(),
+                company.getZipCode(),
+                company.getCity(),
+                company.getStreet(),
+                company.getTin());
+    }
+
+    @Override
+    public void delete(Long id) {
+        jdbcTemplate.update("DELETE FROM COMPANY WHERE TIN = ?", id);
+    }
 }

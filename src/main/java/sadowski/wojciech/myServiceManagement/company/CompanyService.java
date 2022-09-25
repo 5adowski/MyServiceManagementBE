@@ -26,4 +26,14 @@ public class CompanyService implements sadowski.wojciech.myServiceManagement.int
     public Company read(Long id) {
         return repository.select(id);
     }
+
+    @Override
+    public void update(Company company) {
+        repository.put(company);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.delete(id);
+    }
 }
