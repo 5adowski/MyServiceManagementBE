@@ -18,7 +18,7 @@ public class CustomerController {
     @PostMapping(value = ("/customer"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> post(Customer customer) {
+    public ResponseEntity<Customer> post(@RequestBody Customer customer) {
         service.create(customer);
         return ResponseEntity.accepted().body(customer);
     }
@@ -36,7 +36,7 @@ public class CustomerController {
     @PutMapping(value = ("/customer"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> put(Customer customer) {
+    public ResponseEntity<Customer> put(@RequestBody Customer customer) {
         service.update(customer);
         return ResponseEntity.accepted().body(customer);
     }

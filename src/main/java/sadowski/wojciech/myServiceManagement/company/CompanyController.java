@@ -18,7 +18,7 @@ public class CompanyController {
     @PostMapping(value = ("/company"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Company> post(Company company) {
+    public ResponseEntity<Company> post(@RequestBody Company company) {
         service.create(company);
         return ResponseEntity.accepted().body(company);
     }
@@ -36,7 +36,7 @@ public class CompanyController {
     @PutMapping(value = ("/company"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Company> put(Company company) {
+    public ResponseEntity<Company> put(@RequestBody Company company) {
         service.update(company);
         return ResponseEntity.accepted().body(company);
     }

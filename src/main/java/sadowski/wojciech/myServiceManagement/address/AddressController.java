@@ -18,7 +18,7 @@ public class AddressController {
     @PostMapping(value = ("/address"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Address> post(Address address) {
+    public ResponseEntity<Address> post(@RequestBody Address address) {
         service.create(address);
         return ResponseEntity.accepted().body(address);
     }
@@ -36,7 +36,7 @@ public class AddressController {
     @PutMapping(value = ("/address"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Address> put(Address address) {
+    public ResponseEntity<Address> put(@RequestBody Address address) {
         service.update(address);
         return ResponseEntity.accepted().body(address);
     }

@@ -18,7 +18,7 @@ public class TaskController {
     @PostMapping(value = ("/task"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Task> post(Task task) {
+    public ResponseEntity<Task> post(@RequestBody Task task) {
         service.create(task);
         return ResponseEntity.accepted().body(task);
     }
@@ -36,7 +36,7 @@ public class TaskController {
     @PutMapping(value = ("/task"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Task> put(Task task) {
+    public ResponseEntity<Task> put(@RequestBody Task task) {
         service.update(task);
         return ResponseEntity.accepted().body(task);
     }

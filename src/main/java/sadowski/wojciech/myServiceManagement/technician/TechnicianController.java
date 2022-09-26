@@ -18,7 +18,7 @@ public class TechnicianController {
     @PostMapping(value = ("/technician"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Technician> post(Technician technician) {
+    public ResponseEntity<Technician> post(@RequestBody Technician technician) {
         service.create(technician);
         return ResponseEntity.accepted().body(technician);
     }
@@ -36,7 +36,7 @@ public class TechnicianController {
     @PutMapping(value = ("/technician"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Technician> put(Technician technician) {
+    public ResponseEntity<Technician> put(@RequestBody Technician technician) {
         service.update(technician);
         return ResponseEntity.accepted().body(technician);
     }

@@ -18,7 +18,7 @@ public class DeviceController {
     @PostMapping(value = ("/device"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Device> post(Device device) {
+    public ResponseEntity<Device> post(@RequestBody Device device) {
         service.create(device);
         return ResponseEntity.accepted().body(device);
     }
@@ -36,7 +36,7 @@ public class DeviceController {
     @PutMapping(value = ("/device"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Device> put(Device device) {
+    public ResponseEntity<Device> put(@RequestBody Device device) {
         service.update(device);
         return ResponseEntity.accepted().body(device);
     }
