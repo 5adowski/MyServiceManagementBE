@@ -13,10 +13,10 @@ INSERT INTO ADDRESS(ZIP_CODE, CITY, STREET, ID_DEVICES) VALUES('05-500', 'Piasec
                                                               ('02-777', 'Warszawa', 'Komisji Edukacji Narodowej 61', 2),
                                                               ('02-677', 'Warszawa', 'Wynalazek 3', 3);
 
-INSERT INTO DEVICE(ID_FACTORY, ID_FD, SERIAL_NUMBER, CATALOG_NUMBER) VALUES('8290', '434', '000001', '7713230830'),
-                                                                           ('8370', '664', '052433', '7716010244'),
-                                                                           ('8290', '444', '563487', '7713230795');
+INSERT INTO DEVICE(ID, ID_FACTORY, ID_FD, SERIAL_NUMBER, CATALOG_NUMBER) VALUES(7713230830000001,'8290', '434', '000001', '7713230830'),
+                                                                           (7716010244052433,'8370', '664', '052433', '7716010244'),
+                                                                           (7713230795563487,'8290', '444', '563487', '7713230795');
 
-INSERT INTO TASK(DESCRIPTION, DATE, START_TIME, END_TIME, MIN_PRICE, MAX_PRICE, STATUS, NOTES, ID_TECHNICIAN, ID_COMPANY, ID_CUSTOMER, ID_ADDRESS, ID_DEVICE) VALUES('Konserwacja', '2022-12-29', '09:00:00', '10:30:00', 420, null, 'CREATED', null, 1, null, 1, 1, 1),
-                                                                                                                                                     ('Konserwacja, piec hałasuje podczas grzania wody', '2023-11-16', '12:00:00', '13:30:00', 450, null, 'CREATED', null, 1, 9181733595, 3, 3, 3),
-                                                                                                                                                     ('Nie włącza się', '2022-12-29', '10:30:00', '12:00:00', 200, 450, 'PASSED', null, 1, 5223130908, 2, 2, 2);
+INSERT INTO TASK(DESCRIPTION, DATE, START_TIME, END_TIME, MIN_PRICE, MAX_PRICE, STATUS, NOTES, ID_TECHNICIAN, ID_COMPANY, ID_CUSTOMER, ID_ADDRESS, ID_DEVICE) VALUES('Konserwacja', '2022-12-29', '09:00:00', '10:30:00', 420, null, 'CREATED', null, 1, null, 1, 1, 7713230830000001),
+                                                                                                                                                     ('Konserwacja, piec hałasuje podczas grzania wody', '2023-11-16', '12:00:00', '13:30:00', 450, null, 'CREATED', null, 1, 9181733595, 3, 3, 7713230795563487),
+                                                                                                                                                     ('Nie włącza się', '2022-12-29', '10:30:00', '12:00:00', 200, 450, 'PASSED', null, 1, 5223130908, 2, 2, 7716010244052433);

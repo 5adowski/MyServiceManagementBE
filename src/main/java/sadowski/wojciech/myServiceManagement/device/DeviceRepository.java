@@ -17,11 +17,13 @@ public class DeviceRepository implements sadowski.wojciech.myServiceManagement.i
     @Override
     public void insert(Device device) {
         jdbcTemplate.update("INSERT INTO DEVICE(" +
+                        "ID," +
                         "ID_FACTORY," +
                         "ID_FD," +
                         "SERIAL_NUMBER," +
                         "CATALOG_NUMBER)" +
-                        "VALUES (?, ?, ?, ?)",
+                        "VALUES (?, ?, ?, ?, ?)",
+                device.getId(),
                 device.getIdFactory(),
                 device.getIdFd(),
                 device.getSerialNumber(),
@@ -41,11 +43,13 @@ public class DeviceRepository implements sadowski.wojciech.myServiceManagement.i
     @Override
     public void put(Device device) {
         jdbcTemplate.update("UPDATE DEVICE SET " +
+                        "ID = ?," +
                         "ID_FACTORY = ?," +
                         "ID_FD = ?," +
                         "SERIAL_NUMBER = ?," +
                         "CATALOG_NUMBER = ? " +
                         "WHERE ID = ?",
+                device.getId(),
                 device.getIdFactory(),
                 device.getIdFd(),
                 device.getSerialNumber(),
