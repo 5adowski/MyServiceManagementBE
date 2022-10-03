@@ -33,16 +33,20 @@ public class TaskFormService {
     }
 
     public TaskForm create(TaskForm taskForm) {
+        System.out.println(taskForm);
         Company company = companyService.create(taskForm.getCompany());
 
         Address address = addressService.create(taskForm.getAddress());
 
         Customer customer = taskForm.getCustomer();
         customer.setTin(company.getTin());
-        Long[] ids = customer.getIdAddresses();
-        ArrayList<Long> list = new ArrayList<>(List.of(ids));
-        list.add(address.getId());
-        customer.setIdAddresses(list.toArray(new Long[0]));
+        Long[] ids = null;
+        if(!(customer.getIdAddresses()==null)) {
+            ids = customer.getIdAddresses();
+            ArrayList<Long> list = new ArrayList<>(List.of(ids));
+            list.add(address.getId());
+            customer.setIdAddresses(list.toArray(new Long[0]));
+        }
         customerService.create(customer);
 
         Device device = taskForm.getDevice();
