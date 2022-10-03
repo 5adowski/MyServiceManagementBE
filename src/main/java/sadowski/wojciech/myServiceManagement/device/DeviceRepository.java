@@ -21,13 +21,15 @@ public class DeviceRepository implements sadowski.wojciech.myServiceManagement.i
                         "ID_FACTORY," +
                         "ID_FD," +
                         "SERIAL_NUMBER," +
-                        "CATALOG_NUMBER)" +
-                        "VALUES (?, ?, ?, ?, ?)",
+                        "CATALOG_NUMBER," +
+                        "ID_ADDRESS)" +
+                        "VALUES (?, ?, ?, ?, ?, ?)",
                 device.getId(),
                 device.getIdFactory(),
                 device.getIdFd(),
                 device.getSerialNumber(),
-                device.getCatalogNumber());
+                device.getCatalogNumber(),
+                device.getIdAddress());
     }
 
     @Override
@@ -47,13 +49,15 @@ public class DeviceRepository implements sadowski.wojciech.myServiceManagement.i
                         "ID_FACTORY = ?," +
                         "ID_FD = ?," +
                         "SERIAL_NUMBER = ?," +
-                        "CATALOG_NUMBER = ? " +
+                        "CATALOG_NUMBER = ?," +
+                        "ID_ADDRESS = ? " +
                         "WHERE ID = ?",
                 device.getId(),
                 device.getIdFactory(),
                 device.getIdFd(),
                 device.getSerialNumber(),
                 device.getCatalogNumber(),
+                device.getIdAddress(),
                 device.getId());
     }
 

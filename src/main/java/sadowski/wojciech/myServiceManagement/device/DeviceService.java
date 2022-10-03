@@ -14,6 +14,7 @@ public class DeviceService implements sadowski.wojciech.myServiceManagement.inte
 
     @Override
     public void create(Device device) {
+        device.setId(DeviceIdCreator.createId(device));
         repository.insert(device);
     }
 

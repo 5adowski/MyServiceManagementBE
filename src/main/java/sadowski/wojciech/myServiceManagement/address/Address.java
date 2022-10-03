@@ -10,5 +10,4 @@ public class Address {
     private String zipCode;
     private String city;
     private String street;
-    private Long[] idDevices;
 }

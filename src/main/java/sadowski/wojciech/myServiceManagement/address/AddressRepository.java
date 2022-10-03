@@ -19,13 +19,11 @@ public class AddressRepository implements sadowski.wojciech.myServiceManagement.
         jdbcTemplate.update("INSERT INTO ADDRESS(" +
                         "ZIP_CODE," +
                         "CITY," +
-                        "STREET," +
-                        "ID_DEVICES)" +
-                        "VALUES (?, ?, ?, ?)",
+                        "STREET)" +
+                        "VALUES (?, ?, ?)",
                 address.getZipCode(),
                 address.getCity(),
-                address.getStreet(),
-                address.getIdDevices());
+                address.getStreet());
     }
 
     @Override
@@ -41,15 +39,13 @@ public class AddressRepository implements sadowski.wojciech.myServiceManagement.
     @Override
     public void put(Address address) {
         jdbcTemplate.update("UPDATE ADDRESS SET " +
-                "ZIP_CODE = ?," +
-                "CITY = ?," +
-                "STREET = ?," +
-                "ID_DEVICES " +
-                "WHERE ID = ?",
+                        "ZIP_CODE = ?," +
+                        "CITY = ?," +
+                        "STREET = ?" +
+                        "WHERE ID = ?",
                 address.getZipCode(),
                 address.getCity(),
                 address.getStreet(),
-                address.getIdDevices(),
                 address.getId());
     }
 

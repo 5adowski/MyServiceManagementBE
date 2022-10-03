@@ -11,4 +11,5 @@ public class Device {
     private String idFd;
     private String serialNumber;
     private String catalogNumber;
+    private Long idAddress;
 }
