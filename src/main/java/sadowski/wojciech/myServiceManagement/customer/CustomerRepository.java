@@ -80,8 +80,7 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
                 customer.getPhoneNumber(),
                 customer.getEmail(),
                 customer.getTin(),
-                customer.getIdAddresses(),
-                customer.getId()));
+                customer.getIdAddresses()));
         return customer;
     }
 }

@@ -1,6 +1,7 @@
 package sadowski.wojciech.myServiceManagement.task;
 
 import org.springframework.stereotype.Service;
+import sadowski.wojciech.myServiceManagement.status.Status;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class TaskService implements sadowski.wojciech.myServiceManagement.interf
 
     @Override
     public Task create(Task task) {
+        task.setStatus(Status.CREATED);
         return repository.insert(task);
     }
 
