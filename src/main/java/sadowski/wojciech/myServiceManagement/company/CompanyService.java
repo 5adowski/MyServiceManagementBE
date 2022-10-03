@@ -13,8 +13,8 @@ public class CompanyService implements sadowski.wojciech.myServiceManagement.int
     }
 
     @Override
-    public void create(Company company) {
-        repository.insert(company);
+    public Company create(Company company) {
+        return repository.insert(company);
     }
 
     @Override

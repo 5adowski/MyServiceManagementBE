@@ -19,8 +19,7 @@ public class CompanyController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Company> post(@RequestBody Company company) {
-        service.create(company);
-        return ResponseEntity.accepted().body(company);
+        return ResponseEntity.accepted().body(service.create(company));
     }
 
     @GetMapping("/companies")

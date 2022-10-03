@@ -15,7 +15,7 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
     }
 
     @Override
-    public void insert(Task task) {
+    public Task insert(Task task) {
         jdbcTemplate.update("INSERT INTO TASK(" +
                         "DESCRIPTION," +
                         "DATE," +
@@ -44,6 +44,7 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
                 task.getIdCustomer(),
                 task.getIdAddress(),
                 task.getIdDevice());
+        return setId(task);
     }
 
     @Override
@@ -92,5 +93,37 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
     @Override
     public void delete(Long id) {
         jdbcTemplate.update("DELETE FROM TASK WHERE ID = ?", id);
+    }
+
+    private Task setId(Task task) {
+        task.setId(jdbcTemplate.queryForObject("SELECT ID FROM TASK WHERE " +
+                "DESCRIPTION = ? AND " +
+                "DATE = ? AND " +
+                "START_TIME = ? AND " +
+                "END_TIME = ? AND " +
+                "MIN_PRICE = ? AND " +
+                "MAX_PRICE = ? AND " +
+                "STATUS = ? AND " +
+                "NOTES = ? AND " +
+                "ID_TECHNICIAN = ? AND " +
+                "ID_COMPANY = ? AND " +
+                "ID_CUSTOMER = ? AND " +
+                "ID_ADDRESS = ?AND " +
+                "ID_DEVICE = ?",
+                Long.class,
+                task.getDescription(),
+                task.getDate(),
+                task.getStartTime(),
+                task.getEndTime(),
+                task.getMinPrice(),
+                task.getMaxPrice(),
+                task.getStatus(),
+                task.getNotes(),
+                task.getIdTechnician(),
+                task.getIdCompany(),
+                task.getIdCustomer(),
+                task.getIdAddress(),
+                task.getIdDevice()));
+        return task;
     }
 }

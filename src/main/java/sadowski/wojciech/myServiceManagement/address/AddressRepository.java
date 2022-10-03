@@ -15,7 +15,7 @@ public class AddressRepository implements sadowski.wojciech.myServiceManagement.
     }
 
     @Override
-    public void insert(Address address) {
+    public Address insert(Address address) {
         jdbcTemplate.update("INSERT INTO ADDRESS(" +
                         "ZIP_CODE," +
                         "CITY," +
@@ -24,6 +24,7 @@ public class AddressRepository implements sadowski.wojciech.myServiceManagement.
                 address.getZipCode(),
                 address.getCity(),
                 address.getStreet());
+        return setId(address);
     }
 
     @Override
@@ -52,5 +53,17 @@ public class AddressRepository implements sadowski.wojciech.myServiceManagement.
     @Override
     public void delete(Long id) {
         jdbcTemplate.update("DELETE FROM ADDRESS WHERE ID = ?", id);
+    }
+
+    private Address setId(Address address) {
+        address.setId(jdbcTemplate.queryForObject("SELECT ID FROM ADDRESS WHERE " +
+                "ZIP_CODE = ? AND " +
+                "CITY = ? AND " +
+                "STREET = ?",
+                Long.class,
+                address.getZipCode(),
+                address.getCity(),
+                address.getStreet()));
+        return address;
     }
 }

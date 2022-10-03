@@ -15,7 +15,7 @@ public class CompanyRepository implements sadowski.wojciech.myServiceManagement.
     }
 
     @Override
-    public void insert(Company company) {
+    public Company insert(Company company) {
         jdbcTemplate.update("INSERT INTO COMPANY(" +
                         "TIN," +
                         "NAME," +
@@ -28,6 +28,7 @@ public class CompanyRepository implements sadowski.wojciech.myServiceManagement.
                 company.getZipCode(),
                 company.getCity(),
                 company.getStreet());
+        return company;
     }
 
     @Override
@@ -36,8 +37,8 @@ public class CompanyRepository implements sadowski.wojciech.myServiceManagement.
     }
 
     @Override
-    public Company select(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM COMPANY WHERE ID = ?", BeanPropertyRowMapper.newInstance(Company.class), id);
+    public Company select(Long tin) {
+        return jdbcTemplate.queryForObject("SELECT * FROM COMPANY WHERE TIN = ?", BeanPropertyRowMapper.newInstance(Company.class), tin);
     }
 
     @Override

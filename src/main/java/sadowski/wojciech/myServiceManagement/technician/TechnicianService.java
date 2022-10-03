@@ -13,8 +13,8 @@ public class TechnicianService implements sadowski.wojciech.myServiceManagement.
     }
 
     @Override
-    public void create(Technician technician) {
-        repository.insert(technician);
+    public Technician create(Technician technician) {
+        return repository.insert(technician);
     }
 
     @Override

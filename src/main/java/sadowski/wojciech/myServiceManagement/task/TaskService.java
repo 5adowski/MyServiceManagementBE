@@ -13,8 +13,8 @@ public class TaskService implements sadowski.wojciech.myServiceManagement.interf
     }
 
     @Override
-    public void create(Task task) {
-        repository.insert(task);
+    public Task create(Task task) {
+        return repository.insert(task);
     }
 
     @Override

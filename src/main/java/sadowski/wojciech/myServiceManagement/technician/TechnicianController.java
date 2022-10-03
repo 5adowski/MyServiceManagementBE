@@ -19,8 +19,7 @@ public class TechnicianController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Technician> post(@RequestBody Technician technician) {
-        service.create(technician);
-        return ResponseEntity.accepted().body(technician);
+        return ResponseEntity.accepted().body(service.create(technician));
     }
 
     @GetMapping(value = "/technicians")

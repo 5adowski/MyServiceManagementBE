@@ -19,8 +19,7 @@ public class DeviceController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Device> post(@RequestBody Device device) {
-        service.create(device);
-        return ResponseEntity.accepted().body(device);
+        return ResponseEntity.accepted().body(service.create(device));
     }
 
     @GetMapping(value = "/devices")

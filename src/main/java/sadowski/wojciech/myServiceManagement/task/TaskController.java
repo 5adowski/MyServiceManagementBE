@@ -19,8 +19,7 @@ public class TaskController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Task> post(@RequestBody Task task) {
-        service.create(task);
-        return ResponseEntity.accepted().body(task);
+        return ResponseEntity.accepted().body(service.create(task));
     }
 
     @GetMapping(value = "/tasks")

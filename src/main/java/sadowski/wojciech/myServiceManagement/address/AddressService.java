@@ -13,8 +13,8 @@ public class AddressService implements sadowski.wojciech.myServiceManagement.int
     }
 
     @Override
-    public void create(Address address) {
-        repository.insert(address);
+    public Address create(Address address) {
+        return repository.insert(address);
     }
 
     @Override

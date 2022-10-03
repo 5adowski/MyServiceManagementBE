@@ -15,7 +15,7 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
     }
 
     @Override
-    public void insert(Customer customer) {
+    public Customer insert(Customer customer) {
         jdbcTemplate.update("INSERT INTO CUSTOMER(" +
                         "FIRST_NAME," +
                         "LAST_NAME," +
@@ -30,6 +30,7 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
                 customer.getEmail(),
                 customer.getTin(),
                 customer.getIdAddresses());
+        return setId(customer);
     }
 
     @Override
@@ -64,5 +65,23 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
     @Override
     public void delete(Long id) {
         jdbcTemplate.update("DELETE FROM CUSTOMER WHERE ID = ?", id);
+    }
+
+    private Customer setId(Customer customer) {
+        customer.setId(jdbcTemplate.queryForObject("SELECT ID FROM CUSTOMER WHERE " +
+                        "FIRST_NAME = ? AND " +
+                        "LAST_NAME = ? AND " +
+                        "PHONE_NUMBER = ? AND " +
+                        "EMAIL = ? AND " +
+                        "TIN = ? AND " +
+                        "ID_ADDRESSES = ?", Long.class,
+                customer.getFirstName(),
+                customer.getLastName(),
+                customer.getPhoneNumber(),
+                customer.getEmail(),
+                customer.getTin(),
+                customer.getIdAddresses(),
+                customer.getId()));
+        return customer;
     }
 }

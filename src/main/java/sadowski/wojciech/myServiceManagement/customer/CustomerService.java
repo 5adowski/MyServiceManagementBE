@@ -13,8 +13,8 @@ public class CustomerService implements sadowski.wojciech.myServiceManagement.in
     }
 
     @Override
-    public void create(Customer customer) {
-        repository.insert(customer);
+    public Customer create(Customer customer) {
+        return repository.insert(customer);
     }
 
     @Override

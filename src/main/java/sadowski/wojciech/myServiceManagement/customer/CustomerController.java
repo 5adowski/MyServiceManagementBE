@@ -19,8 +19,7 @@ public class CustomerController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> post(@RequestBody Customer customer) {
-        service.create(customer);
-        return ResponseEntity.accepted().body(customer);
+        return ResponseEntity.accepted().body(service.create(customer));
     }
 
     @GetMapping("/customers")

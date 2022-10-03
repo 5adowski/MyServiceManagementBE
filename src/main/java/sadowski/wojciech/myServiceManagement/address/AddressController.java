@@ -19,8 +19,7 @@ public class AddressController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Address> post(@RequestBody Address address) {
-        service.create(address);
-        return ResponseEntity.accepted().body(address);
+        return ResponseEntity.accepted().body(service.create(address));
     }
 
     @GetMapping(value = "/addresses")

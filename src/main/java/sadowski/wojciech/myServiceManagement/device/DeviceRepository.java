@@ -15,7 +15,7 @@ public class DeviceRepository implements sadowski.wojciech.myServiceManagement.i
     }
 
     @Override
-    public void insert(Device device) {
+    public Device insert(Device device) {
         jdbcTemplate.update("INSERT INTO DEVICE(" +
                         "ID," +
                         "ID_FACTORY," +
@@ -24,12 +24,13 @@ public class DeviceRepository implements sadowski.wojciech.myServiceManagement.i
                         "CATALOG_NUMBER," +
                         "ID_ADDRESS)" +
                         "VALUES (?, ?, ?, ?, ?, ?)",
-                device.getId(),
+                createId(device),
                 device.getIdFactory(),
                 device.getIdFd(),
                 device.getSerialNumber(),
                 device.getCatalogNumber(),
                 device.getIdAddress());
+        return setId(device);
     }
 
     @Override
@@ -64,5 +65,26 @@ public class DeviceRepository implements sadowski.wojciech.myServiceManagement.i
     @Override
     public void delete(Long id) {
         jdbcTemplate.update("DELETE FROM DEVICE WHERE ID = ?", id);
+    }
+
+    private Long createId(Device device) {
+        String id = device.getCatalogNumber() + device.getSerialNumber();
+        return Long.valueOf(id);
+    }
+
+    private Device setId(Device device) {
+        device.setId(jdbcTemplate.queryForObject("SELECT ID FROM DEVICE WHERE " +
+                "ID_FACTORY = ? AND " +
+                "ID_FD = ? AND " +
+                "SERIAL_NUMBER = ? AND " +
+                "CATALOG_NUMBER = ? AND " +
+                "ID_ADDRESS = ?",
+                Long.class,
+                device.getIdFactory(),
+                device.getIdFd(),
+                device.getSerialNumber(),
+                device.getCatalogNumber(),
+                device.getIdAddress()));
+        return device;
     }
 }

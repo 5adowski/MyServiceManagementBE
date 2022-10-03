@@ -15,7 +15,7 @@ public class TechnicianRepository implements sadowski.wojciech.myServiceManageme
     }
 
     @Override
-    public void insert(Technician technician) {
+    public Technician insert(Technician technician) {
         jdbcTemplate.update("INSERT INTO TECHNICIAN(" +
                         "NAME," +
                         "PHONE_NUMBER," +
@@ -24,6 +24,7 @@ public class TechnicianRepository implements sadowski.wojciech.myServiceManageme
                 technician.getName(),
                 technician.getPhoneNumber(),
                 technician.getEmail());
+        return setId(technician);
     }
 
     @Override
@@ -52,5 +53,17 @@ public class TechnicianRepository implements sadowski.wojciech.myServiceManageme
     @Override
     public void delete(Long id) {
         jdbcTemplate.update("DELETE FROM TECHNICIAN WHERE ID = ?", id);
+    }
+
+    private Technician setId(Technician technician) {
+        technician.setId(jdbcTemplate.queryForObject("SELECT ID FROM TECHNICIAN WHERE " +
+                        "NAME = ? AND " +
+                        "PHONE_NUMBER = ? AND " +
+                        "EMAIL = ?",
+                Long.class,
+                technician.getName(),
+                technician.getPhoneNumber(),
+                technician.getEmail()));
+        return technician;
     }
 }
