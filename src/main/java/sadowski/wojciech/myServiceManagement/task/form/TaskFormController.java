@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskFormController {
     private TaskFormService service;
 
+    public TaskFormController(TaskFormService service) {
+        this.service = service;
+    }
+
     @PostMapping(value = ("/task/form"),
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
