@@ -41,11 +41,16 @@ public class TaskFormService {
         Customer customer = taskForm.getCustomer();
         customer.setTin(company.getTin());
         Long[] ids = null;
-        if(!(customer.getIdAddresses()==null)) {
+        if(customer.getIdAddresses()!=null) {
             ids = customer.getIdAddresses();
             ArrayList<Long> list = new ArrayList<>(List.of(ids));
             list.add(address.getId());
             customer.setIdAddresses(list.toArray(new Long[0]));
+        }
+        if(customer.getIdAddresses()==null) {
+            ids = new Long[1];
+            ids[0] = address.getId();
+            customer.setIdAddresses(ids);
         }
         customerService.create(customer);
 
