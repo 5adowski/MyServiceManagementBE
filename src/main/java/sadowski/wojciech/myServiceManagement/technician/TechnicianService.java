@@ -28,12 +28,13 @@ public class TechnicianService implements sadowski.wojciech.myServiceManagement.
     }
 
     @Override
-    public void update(Technician technician) {
-        repository.put(technician);
+    public Technician update(Technician technician) {
+        return repository.put(technician);
     }
 
     @Override
     public void delete(Long id) {
         repository.delete(id);
     }
+
 }

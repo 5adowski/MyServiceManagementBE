@@ -22,7 +22,7 @@ public class CompanyRepository implements sadowski.wojciech.myServiceManagement.
                         "ZIP_CODE," +
                         "CITY," +
                         "STREET)" +
-                        "VALUES (?, ?, ?, ?, ?)",
+                        "VALUES(?, ?, ?, ?, ?);",
                 company.getTin(),
                 company.getName(),
                 company.getZipCode(),
@@ -33,33 +33,35 @@ public class CompanyRepository implements sadowski.wojciech.myServiceManagement.
 
     @Override
     public List<Company> selectAll() {
-        return jdbcTemplate.query("SELECT * FROM COMPANY", BeanPropertyRowMapper.newInstance(Company.class));
+        return jdbcTemplate.query("SELECT * FROM COMPANY;", BeanPropertyRowMapper.newInstance(Company.class));
     }
 
     @Override
     public Company select(Long tin) {
-        return jdbcTemplate.queryForObject("SELECT * FROM COMPANY WHERE TIN = ?", BeanPropertyRowMapper.newInstance(Company.class), tin);
+        return jdbcTemplate.queryForObject("SELECT * FROM COMPANY WHERE TIN = ?;", BeanPropertyRowMapper.newInstance(Company.class), tin);
     }
 
     @Override
-    public void put(Company company) {
+    public Company put(Company company) {
         jdbcTemplate.update("UPDATE COMPANY SET " +
-                        "TIN = ?" +
+                        "TIN = ?," +
                         "NAME = ?," +
                         "ZIP_CODE = ?," +
                         "CITY = ?," +
                         "STREET = ? " +
-                        "WHERE TIN = ?",
+                        "WHERE TIN = ?;",
                 company.getTin(),
                 company.getName(),
                 company.getZipCode(),
                 company.getCity(),
                 company.getStreet(),
                 company.getTin());
+        return company;
     }
 
     @Override
-    public void delete(Long id) {
-        jdbcTemplate.update("DELETE FROM COMPANY WHERE TIN = ?", id);
+    public void delete(Long tin) {
+        jdbcTemplate.update("DELETE FROM COMPANY WHERE TIN = ?;", tin);
     }
+
 }

@@ -28,12 +28,13 @@ public class CustomerService implements sadowski.wojciech.myServiceManagement.in
     }
 
     @Override
-    public void update(Customer customer) {
-        repository.put(customer);
+    public Customer update(Customer customer) {
+        return repository.put(customer);
     }
 
     @Override
     public void delete(Long id) {
         repository.delete(id);
     }
+
 }

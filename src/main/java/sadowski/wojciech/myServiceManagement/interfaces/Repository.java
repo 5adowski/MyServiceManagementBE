@@ -6,6 +6,6 @@ public interface Repository<T> {
     public T insert(T object);
     public List<T> selectAll();
     public T select(Long id);
-    public void put(T object);
+    public T put(T object);
     public void delete(Long id);
 }

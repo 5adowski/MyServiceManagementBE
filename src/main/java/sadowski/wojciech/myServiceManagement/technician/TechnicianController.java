@@ -36,12 +36,12 @@ public class TechnicianController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Technician> put(@RequestBody Technician technician) {
-        service.update(technician);
-        return ResponseEntity.accepted().body(technician);
+        return ResponseEntity.accepted().body(service.update(technician));
     }
 
     @DeleteMapping("/technician/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
 }

@@ -20,50 +20,52 @@ public class AddressRepository implements sadowski.wojciech.myServiceManagement.
                         "ZIP_CODE," +
                         "CITY," +
                         "STREET)" +
-                        "VALUES (?, ?, ?)",
+                        "VALUES(?, ?, ?);",
                 address.getZipCode(),
                 address.getCity(),
                 address.getStreet());
-        return setId(address);
+        return collectIdentifier(address);
     }
 
     @Override
     public List<Address> selectAll() {
-        return jdbcTemplate.query("SELECT * FROM ADDRESS", BeanPropertyRowMapper.newInstance(Address.class));
+        return jdbcTemplate.query("SELECT * FROM ADDRESS;", BeanPropertyRowMapper.newInstance(Address.class));
     }
 
     @Override
     public Address select(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM ADDRESS WHERE ID = ?", BeanPropertyRowMapper.newInstance(Address.class), id);
+        return jdbcTemplate.queryForObject("SELECT * FROM ADDRESS WHERE ID = ?;", BeanPropertyRowMapper.newInstance(Address.class), id);
     }
 
     @Override
-    public void put(Address address) {
+    public Address put(Address address) {
         jdbcTemplate.update("UPDATE ADDRESS SET " +
                         "ZIP_CODE = ?," +
                         "CITY = ?," +
-                        "STREET = ?" +
-                        "WHERE ID = ?",
+                        "STREET = ? " +
+                        "WHERE ID = ?;",
                 address.getZipCode(),
                 address.getCity(),
                 address.getStreet(),
                 address.getId());
+        return address;
     }
 
     @Override
     public void delete(Long id) {
-        jdbcTemplate.update("DELETE FROM ADDRESS WHERE ID = ?", id);
+        jdbcTemplate.update("DELETE FROM ADDRESS WHERE ID = ?;", id);
     }
 
-    private Address setId(Address address) {
+    private Address collectIdentifier(Address address) {
         address.setId(jdbcTemplate.queryForObject("SELECT ID FROM ADDRESS WHERE " +
-                "ZIP_CODE = ? AND " +
-                "CITY = ? AND " +
-                "STREET = ?",
+                        "ZIP_CODE = ? AND " +
+                        "CITY = ? AND " +
+                        "STREET = ?;",
                 Long.class,
                 address.getZipCode(),
                 address.getCity(),
                 address.getStreet()));
         return address;
     }
+
 }

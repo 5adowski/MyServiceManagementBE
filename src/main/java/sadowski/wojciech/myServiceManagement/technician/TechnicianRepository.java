@@ -20,50 +20,52 @@ public class TechnicianRepository implements sadowski.wojciech.myServiceManageme
                         "NAME," +
                         "PHONE_NUMBER," +
                         "EMAIL)" +
-                        "VALUES (?, ?, ?)",
+                        "VALUES(?, ?, ?);",
                 technician.getName(),
                 technician.getPhoneNumber(),
                 technician.getEmail());
-        return setId(technician);
+        return collectIdentifier(technician);
     }
 
     @Override
     public List<Technician> selectAll() {
-        return jdbcTemplate.query("SELECT * FROM TECHNICIAN", BeanPropertyRowMapper.newInstance(Technician.class));
+        return jdbcTemplate.query("SELECT * FROM TECHNICIAN;", BeanPropertyRowMapper.newInstance(Technician.class));
     }
 
     @Override
     public Technician select(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM TECHNICIAN WHERE ID = ?", BeanPropertyRowMapper.newInstance(Technician.class), id);
+        return jdbcTemplate.queryForObject("SELECT * FROM TECHNICIAN WHERE ID = ?;", BeanPropertyRowMapper.newInstance(Technician.class), id);
     }
 
     @Override
-    public void put(Technician technician) {
+    public Technician put(Technician technician) {
         jdbcTemplate.update("UPDATE TECHNICIAN SET " +
                         "NAME = ?," +
                         "PHONE_NUMBER = ?," +
                         "EMAIL = ? " +
-                        "WHERE ID = ?",
+                        "WHERE ID = ?;",
                 technician.getName(),
                 technician.getPhoneNumber(),
                 technician.getEmail(),
                 technician.getId());
+        return technician;
     }
 
     @Override
     public void delete(Long id) {
-        jdbcTemplate.update("DELETE FROM TECHNICIAN WHERE ID = ?", id);
+        jdbcTemplate.update("DELETE FROM TECHNICIAN WHERE ID = ?;", id);
     }
 
-    private Technician setId(Technician technician) {
+    private Technician collectIdentifier(Technician technician) {
         technician.setId(jdbcTemplate.queryForObject("SELECT ID FROM TECHNICIAN WHERE " +
                         "NAME = ? AND " +
                         "PHONE_NUMBER = ? AND " +
-                        "EMAIL = ?",
+                        "EMAIL = ?;",
                 Long.class,
                 technician.getName(),
                 technician.getPhoneNumber(),
                 technician.getEmail()));
         return technician;
     }
+
 }

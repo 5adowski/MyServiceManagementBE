@@ -28,12 +28,13 @@ public class DeviceService implements sadowski.wojciech.myServiceManagement.inte
     }
 
     @Override
-    public void update(Device device) {
-        repository.put(device);
+    public Device update(Device device) {
+        return repository.put(device);
     }
 
     @Override
     public void delete(Long id) {
         repository.delete(id);
     }
+
 }

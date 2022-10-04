@@ -36,12 +36,12 @@ public class CompanyController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Company> put(@RequestBody Company company) {
-        service.update(company);
-        return ResponseEntity.accepted().body(company);
+        return ResponseEntity.accepted().body(service.update(company));
     }
 
     @DeleteMapping("/company/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
 }

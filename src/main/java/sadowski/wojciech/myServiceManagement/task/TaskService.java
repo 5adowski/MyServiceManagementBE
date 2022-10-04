@@ -30,12 +30,13 @@ public class TaskService implements sadowski.wojciech.myServiceManagement.interf
     }
 
     @Override
-    public void update(Task task) {
-        repository.put(task);
+    public Task update(Task task) {
+        return repository.put(task);
     }
 
     @Override
     public void delete(Long id) {
         repository.delete(id);
     }
+
 }

@@ -23,28 +23,28 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
                         "EMAIL," +
                         "TIN," +
                         "ID_ADDRESSES)" +
-                        "VALUES (?, ?, ?, ?, ?, ?)",
+                        "VALUES(?, ?, ?, ?, ?, ?);",
                 customer.getFirstName(),
                 customer.getLastName(),
                 customer.getPhoneNumber(),
                 customer.getEmail(),
                 customer.getTin(),
                 customer.getIdAddresses());
-        return setId(customer);
+        return collectIdentifier(customer);
     }
 
     @Override
     public List<Customer> selectAll() {
-        return jdbcTemplate.query("SELECT * FROM CUSTOMER", BeanPropertyRowMapper.newInstance(Customer.class));
+        return jdbcTemplate.query("SELECT * FROM CUSTOMER;", BeanPropertyRowMapper.newInstance(Customer.class));
     }
 
     @Override
     public Customer select(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM CUSTOMER WHERE ID = ?", BeanPropertyRowMapper.newInstance(Customer.class), id);
+        return jdbcTemplate.queryForObject("SELECT * FROM CUSTOMER WHERE ID = ?;", BeanPropertyRowMapper.newInstance(Customer.class), id);
     }
 
     @Override
-    public void put(Customer customer) {
+    public Customer put(Customer customer) {
         jdbcTemplate.update("UPDATE CUSTOMER SET " +
                         "FIRST_NAME = ?," +
                         "LAST_NAME = ?," +
@@ -52,7 +52,7 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
                         "EMAIL = ?," +
                         "TIN = ?," +
                         "ID_ADDRESSES = ? " +
-                        "WHERE ID = ?",
+                        "WHERE ID = ?;",
                 customer.getFirstName(),
                 customer.getLastName(),
                 customer.getPhoneNumber(),
@@ -60,21 +60,23 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
                 customer.getTin(),
                 customer.getIdAddresses(),
                 customer.getId());
+        return customer;
     }
 
     @Override
     public void delete(Long id) {
-        jdbcTemplate.update("DELETE FROM CUSTOMER WHERE ID = ?", id);
+        jdbcTemplate.update("DELETE FROM CUSTOMER WHERE ID = ?;", id);
     }
 
-    private Customer setId(Customer customer) {
+    private Customer collectIdentifier(Customer customer) {
         customer.setId(jdbcTemplate.queryForObject("SELECT ID FROM CUSTOMER WHERE " +
                         "FIRST_NAME = ? AND " +
                         "LAST_NAME = ? AND " +
                         "PHONE_NUMBER = ? AND " +
                         "EMAIL = ? AND " +
                         "TIN = ? AND " +
-                        "ID_ADDRESSES = ?", Long.class,
+                        "ID_ADDRESSES = ?;",
+                Long.class,
                 customer.getFirstName(),
                 customer.getLastName(),
                 customer.getPhoneNumber(),
@@ -83,4 +85,5 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
                 customer.getIdAddresses()));
         return customer;
     }
+
 }

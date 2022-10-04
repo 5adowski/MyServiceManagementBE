@@ -36,12 +36,12 @@ public class AddressController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Address> put(@RequestBody Address address) {
-        service.update(address);
-        return ResponseEntity.accepted().body(address);
+        return ResponseEntity.accepted().body(service.update(address));
     }
 
     @DeleteMapping("/address/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
 }

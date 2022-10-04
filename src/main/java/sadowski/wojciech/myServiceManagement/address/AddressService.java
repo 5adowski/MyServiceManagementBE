@@ -28,12 +28,13 @@ public class AddressService implements sadowski.wojciech.myServiceManagement.int
     }
 
     @Override
-    public void update(Address address) {
-        repository.put(address);
+    public Address update(Address address) {
+        return repository.put(address);
     }
 
     @Override
     public void delete(Long id) {
         repository.delete(id);
     }
+
 }

@@ -36,12 +36,12 @@ public class DeviceController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Device> put(@RequestBody Device device) {
-        service.update(device);
-        return ResponseEntity.accepted().body(device);
+        return ResponseEntity.accepted().body(service.update(device));
     }
 
     @DeleteMapping("/device/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
 }

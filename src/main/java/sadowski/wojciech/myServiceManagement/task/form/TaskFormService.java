@@ -33,7 +33,6 @@ public class TaskFormService {
     }
 
     public TaskForm create(TaskForm taskForm) {
-        System.out.println(taskForm);
         Company company = companyService.create(taskForm.getCompany());
 
         Address address = addressService.create(taskForm.getAddress());

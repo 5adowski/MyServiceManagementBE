@@ -30,35 +30,35 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
                         "ID_CUSTOMER," +
                         "ID_ADDRESS," +
                         "ID_DEVICE)" +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
                 task.getDescription(),
                 task.getDate(),
                 task.getStartTime(),
                 task.getEndTime(),
                 task.getMinPrice(),
                 task.getMaxPrice(),
-                task.getStatus(),
+                task.getStatus().toString(),
                 task.getNotes(),
                 task.getIdTechnician(),
                 task.getIdCompany(),
                 task.getIdCustomer(),
                 task.getIdAddress(),
                 task.getIdDevice());
-        return setId(task);
+        return collectIdentifier(task);
     }
 
     @Override
     public List<Task> selectAll() {
-        return jdbcTemplate.query("SELECT * FROM TASK", BeanPropertyRowMapper.newInstance(Task.class));
+        return jdbcTemplate.query("SELECT * FROM TASK;", BeanPropertyRowMapper.newInstance(Task.class));
     }
 
     @Override
     public Task select(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM TASK WHERE ID = ?", BeanPropertyRowMapper.newInstance(Task.class), id);
+        return jdbcTemplate.queryForObject("SELECT * FROM TASK WHERE ID = ?;", BeanPropertyRowMapper.newInstance(Task.class), id);
     }
 
     @Override
-    public void put(Task task) {
+    public Task put(Task task) {
         jdbcTemplate.update("UPDATE TASK SET " +
                         "DESCRIPTION = ?," +
                         "DATE = ?," +
@@ -73,14 +73,14 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
                         "ID_CUSTOMER = ?," +
                         "ID_ADDRESS = ?," +
                         "ID_DEVICE = ? " +
-                        "WHERE ID = ?",
+                        "WHERE ID = ?;",
                 task.getDescription(),
                 task.getDate(),
                 task.getStartTime(),
                 task.getEndTime(),
                 task.getMinPrice(),
                 task.getMaxPrice(),
-                task.getStatus(),
+                task.getStatus().toString(),
                 task.getNotes(),
                 task.getIdTechnician(),
                 task.getIdCompany(),
@@ -88,28 +88,28 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
                 task.getIdAddress(),
                 task.getIdDevice(),
                 task.getId());
+        return task;
     }
 
     @Override
     public void delete(Long id) {
-        jdbcTemplate.update("DELETE FROM TASK WHERE ID = ?", id);
+        jdbcTemplate.update("DELETE FROM TASK WHERE ID = ?;", id);
     }
 
-    private Task setId(Task task) {
+    private Task collectIdentifier(Task task) {
         task.setId(jdbcTemplate.queryForObject("SELECT ID FROM TASK WHERE " +
-                "DESCRIPTION = ? AND " +
-                "DATE = ? AND " +
-                "START_TIME = ? AND " +
-                "END_TIME = ? AND " +
-                "MIN_PRICE = ? AND " +
-                "MAX_PRICE = ? AND " +
-                "STATUS = ? AND " +
-                "NOTES = ? AND " +
-                "ID_TECHNICIAN = ? AND " +
-                "ID_COMPANY = ? AND " +
-                "ID_CUSTOMER = ? AND " +
-                "ID_ADDRESS = ?AND " +
-                "ID_DEVICE = ?",
+                        "DESCRIPTION = ? AND " +
+                        "DATE = ? AND " +
+                        "START_TIME = ? AND " +
+                        "END_TIME = ? AND " +
+                        "MIN_PRICE = ? AND " +
+                        "MAX_PRICE = ? AND " +
+                        "STATUS = ? AND " +
+                        "ID_TECHNICIAN = ? AND " +
+                        "ID_COMPANY = ? AND " +
+                        "ID_CUSTOMER = ? AND " +
+                        "ID_ADDRESS = ? AND " +
+                        "ID_DEVICE = ?;",
                 Long.class,
                 task.getDescription(),
                 task.getDate(),
@@ -117,8 +117,7 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
                 task.getEndTime(),
                 task.getMinPrice(),
                 task.getMaxPrice(),
-                task.getStatus(),
-                task.getNotes(),
+                task.getStatus().toString(),
                 task.getIdTechnician(),
                 task.getIdCompany(),
                 task.getIdCustomer(),
@@ -126,4 +125,5 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
                 task.getIdDevice()));
         return task;
     }
+
 }

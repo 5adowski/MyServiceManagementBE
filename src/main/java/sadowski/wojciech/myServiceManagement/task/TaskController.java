@@ -36,12 +36,12 @@ public class TaskController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Task> put(@RequestBody Task task) {
-        service.update(task);
-        return ResponseEntity.accepted().body(task);
+        return ResponseEntity.accepted().body(service.update(task));
     }
 
     @DeleteMapping("/task/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
 }
