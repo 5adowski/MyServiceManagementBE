@@ -106,7 +106,6 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
                         "MAX_PRICE = ? AND " +
                         "STATUS = ? AND " +
                         "ID_TECHNICIAN = ? AND " +
-                        "ID_COMPANY = ? AND " +
                         "ID_CUSTOMER = ? AND " +
                         "ID_ADDRESS = ? AND " +
                         "ID_DEVICE = ?;",
@@ -119,7 +118,6 @@ public class TaskRepository implements sadowski.wojciech.myServiceManagement.int
                 task.getMaxPrice(),
                 task.getStatus().toString(),
                 task.getIdTechnician(),
-                task.getIdCompany(),
                 task.getIdCustomer(),
                 task.getIdAddress(),
                 task.getIdDevice()));

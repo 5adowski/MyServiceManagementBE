@@ -74,14 +74,12 @@ public class CustomerRepository implements sadowski.wojciech.myServiceManagement
                         "LAST_NAME = ? AND " +
                         "PHONE_NUMBER = ? AND " +
                         "EMAIL = ? AND " +
-                        "TIN = ? AND " +
                         "ID_ADDRESSES = ?;",
                 Long.class,
                 customer.getFirstName(),
                 customer.getLastName(),
                 customer.getPhoneNumber(),
                 customer.getEmail(),
-                customer.getTin(),
                 customer.getIdAddresses()));
         return customer;
     }
